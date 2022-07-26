@@ -1,2 +1,8 @@
-### Default Setup
+# Node.js
 node_modules
+
+# Build
+dist
+
+# Environment
+.env
