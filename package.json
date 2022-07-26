@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --passWithNoTests --runInBand --no-caches"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/souz4s/ts-clean-api#readme",
   "devDependencies": {
+    "@types/jest": "^28.1.6",
     "@types/node": "^18.6.1",
     "eslint": "^8.20.0",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.7",
     "typescript": "^4.7.4"
   }
 }
