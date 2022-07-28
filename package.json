@@ -12,7 +12,7 @@
     "src/**/*.ts": [
       "prettier --write .",
       "prettier --check .",
-      "jest --bail --findRelatedTests",
+      "jest --bail --findRelatedTests src/**/*.ts",
       "npm run lint --fix"
     ]
   },
