@@ -6,3 +6,19 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id              String        @id @unique
+  email           String
+  name            String
+  musicalGenre    MusicalGenres @relation(fields: [musicalGenresId], references: [id])
+  musicalGenresId String        @unique
+}
+
+model MusicalGenres {
+  id       String   @id @unique
+  name     String
+  score    Int
+  Users    Users[]
+  updateAt DateTime @updatedAt
+}
