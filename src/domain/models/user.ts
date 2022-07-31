@@ -5,5 +5,5 @@ export type UserModel = {
   email: string;
   name: string;
   musicalGenre: MusicalGenreModel["name"];
-  musicalGenresId: MusicalGenreModel["id"];
+  musicalGenresId: string;
 };
