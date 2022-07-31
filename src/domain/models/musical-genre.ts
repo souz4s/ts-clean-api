@@ -4,6 +4,6 @@ export type MusicalGenreModel = {
   id: string;
   name: string;
   score: string;
-  Users: UserModel[];
+  Users: UserModel["id"];
   updateAt: Date;
 };
