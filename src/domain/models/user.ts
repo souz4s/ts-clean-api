@@ -1,4 +1,4 @@
-import { MusicalGenreModel } from "./musical-genre";
+import { MusicalGenreModel } from "@/domain/models";
 
 export type UserModel = {
   id: string;
