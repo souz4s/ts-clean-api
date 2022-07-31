@@ -5,5 +5,4 @@ export type MusicalGenreModel = {
   name: string;
   score: string;
   Users: UserModel["id"];
-  updateAt: Date;
 };
