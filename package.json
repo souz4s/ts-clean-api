@@ -10,8 +10,8 @@
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "prettier --write .",
-      "prettier --check .",
+      "prettier --write",
+      "prettier --check",
       "jest --bail --findRelatedTests src/**/*.ts",
       "npm run lint --fix"
     ]
