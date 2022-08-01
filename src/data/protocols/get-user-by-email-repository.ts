@@ -6,5 +6,5 @@ export interface GetUserByEmailRepository {
 
 export namespace GetUserByEmailRepository {
   export type Params = { userEmail: string };
-  export type Result = UserModel | null;
+  export type Result = { user?: UserModel };
 }
