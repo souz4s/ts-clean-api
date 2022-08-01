@@ -4,6 +4,5 @@ export interface CreateUser {
 
 export namespace CreateUser {
   export type Params = { email: string; name: string };
-
-  export type Result = { id: string };
+  export type Result = { id: number };
 }
