@@ -3,7 +3,7 @@ export type UserModel = {
   email: string;
   name: string;
   musicalGenre: object;
-  musicalGenresId: number;
+  musicalGenreId: number;
   createAt: Date;
   updateAt?: Date;
 };
