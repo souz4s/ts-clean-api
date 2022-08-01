@@ -3,6 +3,4 @@ export type MusicalGenreModel = {
   name: string;
   score: number;
   Users: object[];
-  createAt: Date;
-  updateAt?: Date;
 };

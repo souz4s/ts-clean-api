@@ -4,6 +4,4 @@ export type UserModel = {
   name: string;
   musicalGenre?: object;
   musicalGenreId?: number;
-  createAt: Date;
-  updateAt?: Date;
 };
