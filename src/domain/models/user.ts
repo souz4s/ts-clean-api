@@ -1,9 +1,9 @@
-import { MusicalGenreModel } from "@/domain/models";
-
 export type UserModel = {
-  id: string;
+  id: number;
   email: string;
   name: string;
-  musicalGenre: MusicalGenreModel["name"];
-  musicalGenresId: string;
+  musicalGenre: JSON;
+  musicalGenresId: number;
+  createAt: Date;
+  updateAt?: Date;
 };
