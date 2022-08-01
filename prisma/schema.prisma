@@ -8,17 +8,20 @@ datasource db {
 }
 
 model Users {
-  id              String        @id @unique
-  email           String
-  name            String
-  musicalGenre    MusicalGenres @relation(fields: [musicalGenresId], references: [id])
-  musicalGenresId String        @unique
+  id             Int           @id @default(autoincrement())
+  email          String
+  name           String
+  musicalGenre   MusicalGenres @relation(fields: [musicalGenreId], references: [id])
+  musicalGenreId Int           @unique
+  createAt       DateTime      @default(now())
+  updateAt       DateTime?     @updatedAt
 }
 
 model MusicalGenres {
-  id       String   @id @unique
+  id       Int       @id @default(autoincrement())
   name     String
   score    Int
   Users    Users[]
-  updateAt DateTime @updatedAt
+  createAt DateTime  @default(now())
+  updateAt DateTime? @updatedAt
 }
