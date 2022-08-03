@@ -4,5 +4,5 @@ export interface UpdateMusicalGenreScore {
 
 export namespace UpdateMusicalGenreScore {
   export type Params = { userEmail: string };
-  export type Result = { updated: boolean };
+  export type Result = void;
 }
