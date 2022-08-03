@@ -44,4 +44,13 @@ describe("CreateUserController", () => {
 
     expect(createUserSpy.callsCount).toBe(1);
   });
+
+  it("should return the status ok when creating the user", async () => {
+    const params = mockParams(mockUserModel());
+    const { sut, createUserSpy } = makeSut();
+    const result = await sut.handle(params);
+
+    expect(createUserSpy.callsCount).toBe(1);
+    expect(result.statusCode).toBe(200);
+  });
 });
