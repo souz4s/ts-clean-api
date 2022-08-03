@@ -53,4 +53,13 @@ describe("CreateUserController", () => {
     expect(createUserSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
   });
+
+  it("should return bad request error when missing required parameters", async () => {
+    const params = mockParams(mockUserModel({ email: undefined }));
+    const { sut, createUserSpy } = makeSut();
+    const result = await sut.handle(params);
+
+    expect(createUserSpy.callsCount).toBe(0);
+    expect(result.statusCode).toBe(400);
+  });
 });
