@@ -6,7 +6,6 @@ export class DbUpdateMusicalGenreScore implements UpdateMusicalGenreScore {
   perform = async (params: UpdateMusicalGenreScore.Params) => {
     await this.updateMusicalGenreScoreRepository.updateScore({
       id: params.id,
-      quantity: 1,
     });
   };
 }
