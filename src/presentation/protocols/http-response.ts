@@ -1,4 +1,4 @@
-export type HttpReponse<T> = {
+export type HttpResponse<T> = {
   statusCode: number;
   message?: string;
   body?: T;
