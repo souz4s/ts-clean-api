@@ -11,7 +11,7 @@ export class UserRepository implements CreateUserRepository, GetUserByEmailRepos
       },
     });
 
-    return user;
+    return { id: user.id };
   };
 
   getByEmail = async (params: GetUserByEmailRepository.Params): Promise<GetUserByEmailRepository.Result> => {
