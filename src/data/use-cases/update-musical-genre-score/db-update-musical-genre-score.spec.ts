@@ -2,13 +2,13 @@ import { DbUpdateMusicalGenreScore } from ".";
 import { UpdateMusicalGenreScoreRepository } from "@/data/protocols";
 
 class UpdateMusicalGenreScoreRepositorySpy implements UpdateMusicalGenreScoreRepository {
-  result = undefined;
+  result = 1;
   callsCount = 0;
-  updateScore = async (params: UpdateMusicalGenreScoreRepository.Params): Promise<void> => {
+  updateScore = async (params: UpdateMusicalGenreScoreRepository.Params): Promise<UpdateMusicalGenreScoreRepository.Result> => {
     void (await Promise.resolve(params));
     this.callsCount++;
 
-    return this.result;
+    return { score: this.result };
   };
 }
 
@@ -24,7 +24,7 @@ describe("DbUpdateMusicalGenreScore", () => {
     const { sut, updateMusicalGenreScoreRepositorySpy } = makeSut();
     const result = await sut.perform({ id: 0 });
 
-    expect(result).toBeUndefined();
+    expect(result).toHaveProperty("score");
     expect(updateMusicalGenreScoreRepositorySpy.callsCount).toBe(1);
   });
 });
