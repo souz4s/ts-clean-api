@@ -8,8 +8,6 @@ export class DbCreateUser implements CreateUser {
       ...params,
     });
 
-    if (!createResult.id) throw new Error("Could not create user");
-
     return { id: createResult.id };
   };
 }
