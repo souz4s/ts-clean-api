@@ -3,6 +3,6 @@ export interface UpdateMusicalGenreScore {
 }
 
 export namespace UpdateMusicalGenreScore {
-  export type Params = { musicalGenreId: number };
+  export type Params = { id: number };
   export type Result = void;
 }
