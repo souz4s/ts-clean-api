@@ -62,4 +62,16 @@ describe("CreateUserController", () => {
     expect(createUserSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
   });
+
+  it("should return internal server error when createUser throws error", async () => {
+    const params = mockParams(mockUserModel());
+    const { sut, createUserSpy } = makeSut();
+    jest.spyOn(createUserSpy, "perform").mockImplementationOnce(() => {
+      throw new Error();
+    });
+    const result = await sut.handle(params);
+
+    expect(createUserSpy.callsCount).toBe(0);
+    expect(result.statusCode).toBe(500);
+  });
 });
