@@ -53,4 +53,15 @@ describe("UpdateMusicalGenreScoreController", () => {
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
   });
+
+  it("should return internal server error when updateMusicalGenreScore throws error", async () => {
+    const { sut, updateMusicalGenreScoreSpy } = makeSut();
+    jest.spyOn(updateMusicalGenreScoreSpy, "perform").mockImplementationOnce(() => {
+      throw new Error();
+    });
+    const result = await sut.handle(mockMusicalGenreModel());
+
+    expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
+    expect(result.statusCode).toBe(500);
+  });
 });
