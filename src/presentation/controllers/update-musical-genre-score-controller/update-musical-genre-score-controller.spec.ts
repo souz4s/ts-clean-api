@@ -15,11 +15,12 @@ class UpdateMusicalGenreScoreSpy implements UpdateMusicalGenreScore {
   };
 }
 
-const mockMusicalGenreModel = (): MusicalGenreModel => ({
+const mockMusicalGenreModel = (overwriteModel: Partial<MusicalGenreModel> = {}): MusicalGenreModel => ({
   id: 1,
   name: "some-name",
   score: 0,
   Users: [],
+  ...overwriteModel,
 });
 
 const makeSut = () => {
@@ -43,5 +44,13 @@ describe("UpdateMusicalGenreScoreController", () => {
 
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
+  });
+
+  it("should return bad request error when missing required parameters", async () => {
+    const { sut, updateMusicalGenreScoreSpy } = makeSut();
+    const result = await sut.handle(mockMusicalGenreModel({ id: undefined }));
+
+    expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
+    expect(result.statusCode).toBe(400);
   });
 });
