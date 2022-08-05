@@ -1,7 +1,6 @@
 import { CreateUserController } from ".";
 import { UserModel } from "@/domain/models";
 import { CreateUser } from "@/domain/use-cases";
-import { OnCreateController } from "@/presentation/protocols";
 
 class CreateUserSpy implements CreateUser {
   callsCount = 0;
@@ -23,12 +22,6 @@ const mockUserModel = (overwriteModel: Partial<UserModel> = {}): UserModel => ({
   ...overwriteModel,
 });
 
-const mockParams = (user: UserModel): OnCreateController.Params<UserModel> => ({
-  eventType: "created",
-  previousData: undefined,
-  newData: user,
-});
-
 const makeSut = () => {
   const createUserSpy = new CreateUserSpy();
   const sut = new CreateUserController(createUserSpy);
@@ -38,38 +31,34 @@ const makeSut = () => {
 
 describe("CreateUserController", () => {
   it("should call 'createUser' in the creation of the user", async () => {
-    const params = mockParams(mockUserModel());
     const { sut, createUserSpy } = makeSut();
-    await sut.handle(params);
+    await sut.handle(mockUserModel());
 
     expect(createUserSpy.callsCount).toBe(1);
   });
 
   it("should return the status ok when creating the user", async () => {
-    const params = mockParams(mockUserModel());
     const { sut, createUserSpy } = makeSut();
-    const result = await sut.handle(params);
+    const result = await sut.handle(mockUserModel());
 
     expect(createUserSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
   });
 
   it("should return bad request error when missing required parameters", async () => {
-    const params = mockParams(mockUserModel({ email: undefined }));
     const { sut, createUserSpy } = makeSut();
-    const result = await sut.handle(params);
+    const result = await sut.handle(mockUserModel({ email: undefined, name: undefined }));
 
     expect(createUserSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
   });
 
   it("should return internal server error when createUser throws error", async () => {
-    const params = mockParams(mockUserModel());
     const { sut, createUserSpy } = makeSut();
     jest.spyOn(createUserSpy, "perform").mockImplementationOnce(() => {
       throw new Error();
     });
-    const result = await sut.handle(params);
+    const result = await sut.handle(mockUserModel());
 
     expect(createUserSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(500);

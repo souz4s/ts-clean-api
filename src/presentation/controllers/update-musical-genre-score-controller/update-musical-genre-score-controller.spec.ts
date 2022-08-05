@@ -32,7 +32,7 @@ const makeSut = () => {
 describe("UpdateMusicalGenreScoreController", () => {
   it("should call 'updateMusicalGenreScore' in the update of the score", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
-    await sut.handle({ eventType: "updated", previousData: mockMusicalGenreModel(), newData: mockMusicalGenreModel() });
+    await sut.handle(mockMusicalGenreModel());
 
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
   });

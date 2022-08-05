@@ -1,14 +1,13 @@
-import { UserModel } from "@/domain/models";
 import { CreateUser } from "@/domain/use-cases";
-import { OnCreateController } from "@/presentation/protocols";
+import { Controller } from "@/presentation/protocols";
 import { HttpHelper } from "@/presentation/helpers";
 import { MissingParametersError } from "@/presentation/errors";
 
-export class CreateUserController implements OnCreateController<UserModel> {
+export class CreateUserController implements Controller {
   constructor(private readonly createUser: CreateUser) {}
-  handle = async (params: OnCreateController.Params<UserModel>) => {
+  handle = async (params: CreateUser.Params) => {
     try {
-      const createdUser = params.newData;
+      const createdUser = params;
       const requiredFields = createdUser.email && createdUser.name;
 
       if (!requiredFields) return HttpHelper.BAD_REQUEST(new MissingParametersError());

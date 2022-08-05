@@ -1,17 +1,16 @@
-import { MusicalGenreModel } from "@/domain/models";
 import { UpdateMusicalGenreScore } from "@/domain/use-cases";
 import { HttpHelper } from "@/presentation/helpers";
-import { OnUpdateController } from "@/presentation/protocols";
+import { Controller } from "@/presentation/protocols";
 import { MissingParametersError } from "@/presentation/errors";
 
-export class UpdateMusicalGenreScoreController implements OnUpdateController<MusicalGenreModel> {
+export class UpdateMusicalGenreScoreController implements Controller {
   constructor(private readonly updateMusicalGenreScore: UpdateMusicalGenreScore) {}
-  handle = async (params: OnUpdateController.Params<MusicalGenreModel>) => {
+  handle = async (params: UpdateMusicalGenreScore.Params) => {
     try {
-      if (!params.newData.id) return HttpHelper.BAD_REQUEST(new MissingParametersError());
+      if (!params.id) return HttpHelper.BAD_REQUEST(new MissingParametersError());
 
       const creationResult = await this.updateMusicalGenreScore.perform({
-        id: params.newData.id,
+        id: params.id,
       });
 
       return HttpHelper.OK(creationResult);
