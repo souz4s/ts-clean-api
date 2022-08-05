@@ -36,4 +36,12 @@ describe("UpdateMusicalGenreScoreController", () => {
 
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
   });
+
+  it("should return the status ok when update musical genre score", async () => {
+    const { sut, updateMusicalGenreScoreSpy } = makeSut();
+    const result = await sut.handle(mockMusicalGenreModel());
+
+    expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
+    expect(result.statusCode).toBe(200);
+  });
 });
