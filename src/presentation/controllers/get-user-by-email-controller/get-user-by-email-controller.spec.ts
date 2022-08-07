@@ -37,4 +37,12 @@ describe("GetUserByEmailController", () => {
     expect(getUserByEmailSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
   });
+
+  it("should return bad request error when missing required parameters", async () => {
+    const { sut, getUserByEmailSpy } = makeSut();
+    const result = await sut.handle(mockUserModel({ email: undefined }));
+
+    expect(getUserByEmailSpy.callsCount).toBe(0);
+    expect(result.statusCode).toBe(400);
+  });
 });
