@@ -45,4 +45,15 @@ describe("GetUserByEmailController", () => {
     expect(getUserByEmailSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
   });
+
+  it("should return internal server error when getUserByEmail throws error", async () => {
+    const { sut, getUserByEmailSpy } = makeSut();
+    jest.spyOn(getUserByEmailSpy, "perform").mockImplementationOnce(() => {
+      throw new Error();
+    });
+    const result = await sut.handle(mockUserModel());
+
+    expect(getUserByEmailSpy.callsCount).toBe(0);
+    expect(result.statusCode).toBe(500);
+  });
 });
