@@ -1,0 +1,40 @@
+import { GetUserByEmailController } from ".";
+import { UserModel } from "@/domain/models";
+import { GetUserByEmail } from "@/domain/use-cases";
+
+class GetUserByEmailSpy implements GetUserByEmail {
+  result: UserModel | undefined;
+  callsCount = 0;
+  receivedParams: GetUserByEmail.Params[] = [];
+  perform = async (params: GetUserByEmail.Params): Promise<GetUserByEmail.Result> => {
+    void (await Promise.resolve());
+    this.callsCount++;
+    this.receivedParams.push(params);
+
+    return { user: this.result };
+  };
+}
+
+const mockUserModel = (overwriteModel: Partial<UserModel> = {}): UserModel => ({
+  id: 1,
+  email: "some-email",
+  name: "some-name",
+  ...overwriteModel,
+});
+
+const makeSut = () => {
+  const getUserByEmailSpy = new GetUserByEmailSpy();
+  const sut = new GetUserByEmailController(getUserByEmailSpy);
+
+  return { sut, getUserByEmailSpy };
+};
+
+describe("GetUserByEmailController", () => {
+  it("should return the status ok when get user by email", async () => {
+    const { sut, getUserByEmailSpy } = makeSut();
+    const result = await sut.handle(mockUserModel());
+
+    expect(getUserByEmailSpy.callsCount).toBe(1);
+    expect(result.statusCode).toBe(200);
+  });
+});
