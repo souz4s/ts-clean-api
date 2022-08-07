@@ -12,9 +12,9 @@ export class CreateUserController implements Controller {
 
       if (!requiredFields) return HttpHelper.BAD_REQUEST(new MissingParametersError());
 
-      const creationResult = await this.createUser.perform(createdUser);
+      const getResult = await this.createUser.perform(createdUser);
 
-      return HttpHelper.OK(creationResult);
+      return HttpHelper.OK(getResult.id);
     } catch (err) {
       return HttpHelper.INTERNAL_SERVER_ERROR(err as Error);
     }
