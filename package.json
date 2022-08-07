@@ -2,7 +2,7 @@
   "name": "ts-clean-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
@@ -19,6 +19,7 @@
     ]
   },
   "scripts": {
+    "start": "node -r ts-node/register -r tsconfig-paths/register dist/main/server.js",
     "test": "jest --passWithNoTests --runInBand --no-cache --coverage",
     "lint": "eslint src/**/*.ts --max-warnings=0",
     "build": "tsc",
