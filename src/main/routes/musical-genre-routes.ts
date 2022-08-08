@@ -6,6 +6,6 @@ import { makeDbUpdateMusicalGenreScoreController } from "@/main/factories/contro
 
 const musicalGenresRoutes = Router();
 
-musicalGenresRoutes.put("/musicalGenres/:id", expressRouterAdapter(makeDbUpdateMusicalGenreScoreController()));
+musicalGenresRoutes.put("/musicalGenres", expressRouterAdapter(makeDbUpdateMusicalGenreScoreController()));
 
 export { musicalGenresRoutes };
