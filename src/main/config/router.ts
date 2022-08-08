@@ -8,4 +8,4 @@ const router = Router();
 router.use(usersRoutes);
 router.use(musicalGenresRoutes);
 
-export { router, musicalGenresRoutes };
+export { router, usersRoutes, musicalGenresRoutes };
