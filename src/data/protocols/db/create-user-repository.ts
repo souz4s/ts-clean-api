@@ -3,6 +3,6 @@ export interface CreateUserRepository {
 }
 
 export namespace CreateUserRepository {
-  export type Params = { email: string; name: string };
+  export type Params = { email: string; name: string; musicalGenreId: number };
   export type Result = { id: number };
 }

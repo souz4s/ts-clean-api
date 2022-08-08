@@ -19,6 +19,7 @@ const mockUserModel = (overwriteModel: Partial<UserModel> = {}): UserModel => ({
   id: 1,
   email: "some-email",
   name: "some-name",
+  musicalGenreId: 1,
   ...overwriteModel,
 });
 

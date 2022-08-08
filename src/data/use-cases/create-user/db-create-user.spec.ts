@@ -21,6 +21,7 @@ const makeSut = () => {
 const mockParams = (overwriteParams: Partial<CreateUser.Params> = {}): CreateUser.Params => ({
   email: "some-email",
   name: "some-name",
+  musicalGenreId: 1,
   ...overwriteParams,
 });
 

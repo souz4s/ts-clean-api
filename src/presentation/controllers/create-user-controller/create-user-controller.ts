@@ -8,7 +8,7 @@ export class CreateUserController implements Controller {
   handle = async (params: CreateUser.Params) => {
     try {
       const createdUser = params;
-      const requiredFields = createdUser.email && createdUser.name;
+      const requiredFields = createdUser.email && createdUser.name && createdUser.musicalGenreId;
 
       if (!requiredFields) return HttpHelper.BAD_REQUEST(new MissingParametersError());
 

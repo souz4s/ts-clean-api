@@ -19,6 +19,7 @@ const mockUserModel = (overwriteModel: Partial<UserModel> = {}): UserModel => ({
   id: 0,
   email: "some-email",
   name: "some-name",
+  musicalGenreId: 1,
   ...overwriteModel,
 });
 
@@ -47,7 +48,7 @@ describe("CreateUserController", () => {
 
   it("should return bad request error when missing required parameters", async () => {
     const { sut, createUserSpy } = makeSut();
-    const result = await sut.handle(mockUserModel({ email: undefined, name: undefined }));
+    const result = await sut.handle(mockUserModel({ email: undefined, name: undefined, musicalGenreId: undefined }));
 
     expect(createUserSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
