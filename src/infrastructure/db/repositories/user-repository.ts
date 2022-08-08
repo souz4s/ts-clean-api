@@ -6,7 +6,6 @@ export class UserRepository implements CreateUserRepository, GetUserByEmailRepos
     const userCollection = prismaClient.getConnection().users;
     const user = await userCollection.create({
       data: {
-        musicalGenre: {},
         ...params,
       },
     });
