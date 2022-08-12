@@ -5,9 +5,9 @@ import { MissingParametersError } from "@/presentation/errors";
 
 export class CreateUserController implements Controller {
   constructor(private readonly createUser: CreateUser) {}
-  handle = async (params: CreateUser.Params) => {
+  handle = async (request: CreateUserController.Request) => {
     try {
-      const createdUser = params;
+      const createdUser = request;
       const requiredFields = createdUser.email && createdUser.name && createdUser.musicalGenreId;
 
       if (!requiredFields) return HttpHelper.BAD_REQUEST(new MissingParametersError());
@@ -18,5 +18,13 @@ export class CreateUserController implements Controller {
     } catch (err) {
       return HttpHelper.INTERNAL_SERVER_ERROR(err as Error);
     }
+  };
+}
+
+export namespace CreateUserController {
+  export type Request = {
+    email: string;
+    name: string;
+    musicalGenreId: number;
   };
 }

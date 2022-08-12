@@ -5,12 +5,12 @@ import { MissingParametersError } from "@/presentation/errors";
 
 export class UpdateMusicalGenreScoreController implements Controller {
   constructor(private readonly updateMusicalGenreScore: UpdateMusicalGenreScore) {}
-  handle = async (params: UpdateMusicalGenreScore.Params) => {
+  handle = async (request: UpdateMusicalGenreScoreController.Request) => {
     try {
-      if (!params.id) return HttpHelper.BAD_REQUEST(new MissingParametersError());
+      if (!request.id) return HttpHelper.BAD_REQUEST(new MissingParametersError());
 
       const getResult = await this.updateMusicalGenreScore.perform({
-        id: params.id,
+        id: request.id,
       });
 
       return HttpHelper.OK(getResult.score);
@@ -18,4 +18,8 @@ export class UpdateMusicalGenreScoreController implements Controller {
       return HttpHelper.INTERNAL_SERVER_ERROR(err as Error);
     }
   };
+}
+
+export namespace UpdateMusicalGenreScoreController {
+  export type Request = { id: number };
 }

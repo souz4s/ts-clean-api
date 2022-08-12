@@ -5,9 +5,9 @@ import { MissingParametersError } from "@/presentation/errors";
 
 export class GetUserByEmailController implements Controller {
   constructor(private readonly getUserByEmail: GetUserByEmail) {}
-  handle = async (params: GetUserByEmail.Params) => {
+  handle = async (request: GetUserByEmailController.Request) => {
     try {
-      const getUser = params;
+      const getUser = request;
       const requiredFields = getUser.email;
 
       if (!requiredFields) {
@@ -21,4 +21,8 @@ export class GetUserByEmailController implements Controller {
       return HttpHelper.INTERNAL_SERVER_ERROR(err as Error);
     }
   };
+}
+
+export namespace GetUserByEmailController {
+  export type Request = { email: string };
 }
