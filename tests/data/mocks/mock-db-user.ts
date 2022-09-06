@@ -1,4 +1,5 @@
-import { CreateUserRepository } from "@/data/protocols";
+import { CreateUserRepository, GetUserByEmailRepository } from "@/data/protocols";
+import { mockCreateUserParams } from "@/tests/domain/mocks";
 
 import { faker } from "@faker-js/faker";
 
@@ -8,5 +9,14 @@ export class CreateUserRepositorySpy implements CreateUserRepository {
   createUser = async (params: CreateUserRepository.Params): Promise<CreateUserRepository.Result> => {
     this.params = params;
     return { id: this.result };
+  };
+}
+
+export class GetUserByEmailRepositorySpy implements GetUserByEmailRepository {
+  params: GetUserByEmailRepository.Params | undefined;
+  result: typeof mockCreateUserParams | undefined;
+  getByEmail = async (params: GetUserByEmailRepository.Params): Promise<GetUserByEmailRepository.Result> => {
+    this.params = params;
+    return { user: this.result };
   };
 }
