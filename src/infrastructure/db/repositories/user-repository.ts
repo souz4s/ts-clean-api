@@ -9,7 +9,6 @@ export class UserRepository implements CreateUserRepository, GetUserByEmailRepos
         ...params,
       },
     });
-
     return { id: user.id };
   };
 
@@ -20,7 +19,6 @@ export class UserRepository implements CreateUserRepository, GetUserByEmailRepos
         email: params.email,
       },
     });
-
     return { user: user || undefined };
   };
 }

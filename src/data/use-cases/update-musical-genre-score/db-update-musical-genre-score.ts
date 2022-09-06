@@ -7,7 +7,6 @@ export class DbUpdateMusicalGenreScore implements UpdateMusicalGenreScore {
     const createResult = await this.updateMusicalGenreScoreRepository.updateScore({
       id: params.id,
     });
-
     return { score: createResult.score };
   };
 }

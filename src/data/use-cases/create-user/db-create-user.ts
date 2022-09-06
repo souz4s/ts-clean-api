@@ -7,7 +7,6 @@ export class DbCreateUser implements CreateUser {
     const createResult = await this.createUserRepository.createUser({
       ...params,
     });
-
     return { id: createResult.id };
   };
 }

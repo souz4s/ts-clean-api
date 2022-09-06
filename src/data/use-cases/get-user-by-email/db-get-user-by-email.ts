@@ -7,7 +7,6 @@ export class DbGetUserByEmail implements GetUserByEmail {
     const createResult = await this.getUserByEmailRepository.getByEmail({
       email: params.email,
     });
-
     return { user: createResult.user };
   };
 }

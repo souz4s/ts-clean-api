@@ -18,7 +18,6 @@ export class MusicalGenreRepository implements UpdateMusicalGenreScoreRepository
         score: score,
       },
     });
-
     return { score: musicalGenre.score };
   };
 }

@@ -8,11 +8,9 @@ export class UpdateMusicalGenreScoreController implements Controller {
   handle = async (request: UpdateMusicalGenreScoreController.Request) => {
     try {
       if (!request.id) return HttpHelper.BAD_REQUEST(new MissingParametersError());
-
       const getResult = await this.updateMusicalGenreScore.perform({
         id: request.id,
       });
-
       return HttpHelper.OK(getResult.score);
     } catch (err) {
       return HttpHelper.INTERNAL_SERVER_ERROR(err as Error);
