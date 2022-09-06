@@ -2,10 +2,11 @@
   "compilerOptions": {
     "target": "es2019",
     "module": "commonjs",
-    "rootDirs": ["src"],
+    "rootDirs": ["src", "tests"],
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@/tests/*": ["../tests/*"]
     },
     "sourceMap": true,
     "outDir": "dist",
@@ -15,6 +16,6 @@
     "noUnusedLocals": true,
     "noImplicitReturns": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
   "exclude": ["node_modules"]
 }
