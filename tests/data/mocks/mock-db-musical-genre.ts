@@ -8,6 +8,7 @@ export class UpdateMusicalGenreScoreRepositorySpy implements UpdateMusicalGenreS
   result = parseInt(faker.random.numeric(2));
   updateScore = async (params: UpdateMusicalGenreScoreRepository.Params): Promise<UpdateMusicalGenreScoreRepository.Result> => {
     this.params = params;
+    this.callsCount++;
     return { score: this.result };
   };
 }
