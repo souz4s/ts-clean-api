@@ -3,12 +3,12 @@ import { UpdateMusicalGenreScoreRepository } from "@/data/protocols";
 import { faker } from "@faker-js/faker";
 
 export class UpdateMusicalGenreScoreRepositorySpy implements UpdateMusicalGenreScoreRepository {
-  params: UpdateMusicalGenreScoreRepository.Params | undefined;
   callsCount = 0;
+  receivedParams: unknown[] = [];
   result = parseInt(faker.random.numeric(2));
   updateScore = async (params: UpdateMusicalGenreScoreRepository.Params): Promise<UpdateMusicalGenreScoreRepository.Result> => {
-    this.params = params;
     this.callsCount++;
+    this.receivedParams.push(params);
     return { score: this.result };
   };
 }
