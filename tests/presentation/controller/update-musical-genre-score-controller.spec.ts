@@ -1,46 +1,25 @@
-import { UpdateMusicalGenreScoreController } from ".";
-import { MusicalGenreModel } from "@/domain/models";
-import { UpdateMusicalGenreScore } from "@/domain/use-cases";
-
-class UpdateMusicalGenreScoreSpy implements UpdateMusicalGenreScore {
-  result = 0;
-  callsCount = 0;
-  receivedParams: UpdateMusicalGenreScore.Params[] = [];
-  perform = async (params: UpdateMusicalGenreScore.Params): Promise<UpdateMusicalGenreScore.Result> => {
-    void (await Promise.resolve());
-    this.callsCount++;
-    this.receivedParams.push(params);
-
-    return { score: this.result };
-  };
-}
-
-const mockMusicalGenreModel = (overwriteModel: Partial<MusicalGenreModel> = {}): MusicalGenreModel => ({
-  id: 1,
-  name: "some-name",
-  score: 0,
-  Users: [],
-  ...overwriteModel,
-});
+// @ts-nocheck
+import { UpdateMusicalGenreScoreController } from "@/presentation/controllers";
+import { mockUpdateMusicalGenreScore } from "@/tests/domain/mocks";
+import { UpdateMusicalGenreScoreSpy } from "@/tests/presentation/mocks";
 
 const makeSut = () => {
   const updateMusicalGenreScoreSpy = new UpdateMusicalGenreScoreSpy();
   const sut = new UpdateMusicalGenreScoreController(updateMusicalGenreScoreSpy);
-
   return { sut, updateMusicalGenreScoreSpy };
 };
 
 describe("UpdateMusicalGenreScoreController", () => {
   it("should call 'updateMusicalGenreScore' in the update of the score", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
-    await sut.handle(mockMusicalGenreModel());
+    await sut.handle(mockUpdateMusicalGenreScore());
 
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
   });
 
   it("should return the status ok when update musical genre score", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
-    const result = await sut.handle(mockMusicalGenreModel());
+    const result = await sut.handle(mockUpdateMusicalGenreScore());
 
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
@@ -48,7 +27,7 @@ describe("UpdateMusicalGenreScoreController", () => {
 
   it("should return bad request error when missing required parameters", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
-    const result = await sut.handle(mockMusicalGenreModel({ id: undefined }));
+    const result = await sut.handle({ id: undefined });
 
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
@@ -59,7 +38,7 @@ describe("UpdateMusicalGenreScoreController", () => {
     jest.spyOn(updateMusicalGenreScoreSpy, "perform").mockImplementationOnce(() => {
       throw new Error();
     });
-    const result = await sut.handle(mockMusicalGenreModel());
+    const result = await sut.handle(mockUpdateMusicalGenreScore());
 
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(500);
