@@ -13,14 +13,12 @@ describe("CreateUserController", () => {
   it("should call 'createUser' in the creation of the user", async () => {
     const { sut, createUserSpy } = makeSut();
     await sut.handle(mockCreateUserParams());
-
     expect(createUserSpy.callsCount).toBe(1);
   });
 
   it("should return the status ok when creating the user", async () => {
     const { sut, createUserSpy } = makeSut();
     const result = await sut.handle(mockCreateUserParams());
-
     expect(createUserSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
   });
@@ -28,7 +26,6 @@ describe("CreateUserController", () => {
   it("should return bad request error when missing required parameters", async () => {
     const { sut, createUserSpy } = makeSut();
     const result = await sut.handle({ email: undefined, name: undefined, musicalGenreId: undefined });
-
     expect(createUserSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
   });
@@ -39,7 +36,6 @@ describe("CreateUserController", () => {
       throw new Error();
     });
     const result = await sut.handle(mockCreateUserParams());
-
     expect(createUserSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(500);
   });
