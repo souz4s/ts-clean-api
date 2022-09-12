@@ -34,7 +34,7 @@ export class HttpHelper {
     message: "Successfully created",
   });
 
-  static NOT_CONTENT = (): HttpResponse<null> => ({
+  static NO_CONTENT = (): HttpResponse<null> => ({
     statusCode: 204,
   });
 }
