@@ -13,14 +13,12 @@ describe("UpdateMusicalGenreScoreController", () => {
   it("should call 'updateMusicalGenreScore' in the update of the score", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
     await sut.handle(mockUpdateMusicalGenreScore());
-
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
   });
 
   it("should return the status ok when update musical genre score", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
     const result = await sut.handle(mockUpdateMusicalGenreScore());
-
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
   });
@@ -28,7 +26,6 @@ describe("UpdateMusicalGenreScoreController", () => {
   it("should return bad request error when missing required parameters", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
     const result = await sut.handle({ id: undefined });
-
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(400);
   });
@@ -39,7 +36,6 @@ describe("UpdateMusicalGenreScoreController", () => {
       throw new Error();
     });
     const result = await sut.handle(mockUpdateMusicalGenreScore());
-
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(500);
   });
