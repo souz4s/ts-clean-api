@@ -1,4 +1,5 @@
-import { CreateUser } from "@/domain/use-cases";
+import { CreateUser, GetUserByEmail } from "@/domain/use-cases";
+import { mockCreateUserParams } from "@/tests/domain/mocks";
 
 import { faker } from "@faker-js/faker";
 
@@ -10,5 +11,16 @@ export class CreateUserSpy implements CreateUser {
     this.callsCount++;
     this.params = params;
     return { id: this.result };
+  };
+}
+
+export class GetUserByEmailSpy implements GetUserByEmail {
+  params: GetUserByEmail.Params | undefined;
+  callsCount = 0;
+  result: typeof mockCreateUserParams | undefined;
+  perform = async (params: GetUserByEmail.Params): Promise<GetUserByEmail.Result> => {
+    this.callsCount++;
+    this.params = params;
+    return { user: this.result };
   };
 }
