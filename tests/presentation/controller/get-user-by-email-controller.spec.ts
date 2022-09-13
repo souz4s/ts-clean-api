@@ -1,7 +1,8 @@
 // @ts-nocheck
 import { GetUserByEmailController } from "@/presentation/controllers";
-import { mockCreateUserParams } from "@/tests/domain/mocks";
 import { GetUserByEmailSpy } from "@/tests/presentation/mocks";
+
+import { faker } from "@faker-js/faker";
 
 const makeSut = () => {
   const getUserByEmailSpy = new GetUserByEmailSpy();
@@ -12,7 +13,7 @@ const makeSut = () => {
 describe("GetUserByEmailController", () => {
   it("should return the status ok when get user by email", async () => {
     const { sut, getUserByEmailSpy } = makeSut();
-    const result = await sut.handle(mockCreateUserParams());
+    const result = await sut.handle({ email: faker.internet.email().toString() });
     expect(getUserByEmailSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
   });
@@ -29,7 +30,7 @@ describe("GetUserByEmailController", () => {
     jest.spyOn(getUserByEmailSpy, "perform").mockImplementationOnce(() => {
       throw new Error();
     });
-    const result = await sut.handle(mockCreateUserParams());
+    const result = await sut.handle({ email: faker.internet.email().toString() });
     expect(getUserByEmailSpy.callsCount).toBe(0);
     expect(result.statusCode).toBe(500);
   });
