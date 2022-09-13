@@ -20,6 +20,14 @@ describe("GetUserByEmailController", () => {
     expect(result.statusCode).toBe(200);
   });
 
+  it("should return status code 'no content' when user not found", async () => {
+    const { sut, getUserByEmailSpy } = makeSut();
+    getUserByEmailSpy.result = undefined;
+    const result = await sut.handle({ email: faker.internet.email().toString() });
+    expect(getUserByEmailSpy.callsCount).toBe(1);
+    expect(result.statusCode).toBe(204);
+  });
+
   it("should return bad request error when missing required parameters", async () => {
     const { sut, getUserByEmailSpy } = makeSut();
     const result = await sut.handle({ email: undefined });
