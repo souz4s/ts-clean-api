@@ -13,7 +13,11 @@ export class GetUserByEmailController implements Controller {
         return HttpHelper.BAD_REQUEST(new MissingParametersError());
       }
       const getResult = await this.getUserByEmail.perform(getUser);
-      return HttpHelper.OK(getResult.user);
+      if (!getResult.user) {
+        return HttpHelper.NO_CONTENT();
+      } else {
+        return HttpHelper.OK(getResult.user);
+      }
     } catch (err) {
       return HttpHelper.INTERNAL_SERVER_ERROR(err as Error);
     }
