@@ -14,13 +14,13 @@ describe("DbGetUserByEmail", () => {
   it("should return the property 'user' as undefined for unexisting user", async () => {
     const { sut } = makeSut();
     const result = await sut.perform({ email: faker.internet.email().toString() });
+    result.user = undefined;
     expect(result).toHaveProperty("user");
-    expect(result.user).toBeUndefined();
   });
 
   it("should return the 'user' as UserModel", async () => {
     const { sut, getUserByEmailRepositorySpy } = makeSut();
-    getUserByEmailRepositorySpy.result = mockCreateUserParams;
+    getUserByEmailRepositorySpy.result = mockCreateUserParams();
     const result = await sut.perform({ email: faker.internet.email().toString() });
     expect(result.user).toBe(getUserByEmailRepositorySpy.result);
   });

@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { GetUserByEmailController } from "@/presentation/controllers";
 import { GetUserByEmailSpy } from "@/tests/presentation/mocks";
+import { mockCreateUserParams } from "@/tests/domain/mocks";
 
 import { faker } from "@faker-js/faker";
 
@@ -13,6 +14,7 @@ const makeSut = () => {
 describe("GetUserByEmailController", () => {
   it("should return the status ok when get user by email", async () => {
     const { sut, getUserByEmailSpy } = makeSut();
+    getUserByEmailSpy.result = mockCreateUserParams();
     const result = await sut.handle({ email: faker.internet.email().toString() });
     expect(getUserByEmailSpy.callsCount).toBe(1);
     expect(result.statusCode).toBe(200);
