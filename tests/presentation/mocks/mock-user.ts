@@ -17,7 +17,7 @@ export class CreateUserSpy implements CreateUser {
 export class GetUserByEmailSpy implements GetUserByEmail {
   params: GetUserByEmail.Params | undefined;
   callsCount = 0;
-  result = mockCreateUserParams() || undefined;
+  result = mockCreateUserParams();
   perform = async (params: GetUserByEmail.Params): Promise<GetUserByEmail.Result> => {
     this.callsCount++;
     this.params = params;

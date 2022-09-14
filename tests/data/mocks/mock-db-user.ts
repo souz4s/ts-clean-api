@@ -14,7 +14,7 @@ export class CreateUserRepositorySpy implements CreateUserRepository {
 
 export class GetUserByEmailRepositorySpy implements GetUserByEmailRepository {
   params: GetUserByEmailRepository.Params | undefined;
-  result = mockCreateUserParams() || undefined;
+  result = mockCreateUserParams();
   getByEmail = async (params: GetUserByEmailRepository.Params): Promise<GetUserByEmailRepository.Result> => {
     this.params = params;
     return { user: this.result };
