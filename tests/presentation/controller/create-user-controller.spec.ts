@@ -33,7 +33,7 @@ describe("CreateUserController", () => {
   it("should return internal server error when createUser throws error", async () => {
     const { sut, createUserSpy } = makeSut();
     jest.spyOn(createUserSpy, "perform").mockImplementationOnce(() => {
-      throw new Error();
+      throw new Error().stack;
     });
     const result = await sut.handle(mockCreateUserParams());
     expect(createUserSpy.callsCount).toBe(0);

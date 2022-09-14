@@ -38,7 +38,7 @@ describe("GetUserByEmailController", () => {
   it("should return internal server error when getUserByEmail throws error", async () => {
     const { sut, getUserByEmailSpy } = makeSut();
     jest.spyOn(getUserByEmailSpy, "perform").mockImplementationOnce(() => {
-      throw new Error();
+      throw new Error().stack;
     });
     const result = await sut.handle({ email: faker.internet.email().toString() });
     expect(getUserByEmailSpy.callsCount).toBe(0);

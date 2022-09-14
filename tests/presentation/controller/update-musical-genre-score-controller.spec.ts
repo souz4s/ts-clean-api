@@ -34,7 +34,7 @@ describe("UpdateMusicalGenreScoreController", () => {
   it("should return internal server error when updateMusicalGenreScore throws error", async () => {
     const { sut, updateMusicalGenreScoreSpy } = makeSut();
     jest.spyOn(updateMusicalGenreScoreSpy, "perform").mockImplementationOnce(() => {
-      throw new Error();
+      throw new Error().stack;
     });
     const result = await sut.handle({ id: faker.random.numeric(2) });
     expect(updateMusicalGenreScoreSpy.callsCount).toBe(0);
