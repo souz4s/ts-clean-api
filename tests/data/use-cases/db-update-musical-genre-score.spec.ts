@@ -1,7 +1,6 @@
 import { DbUpdateMusicalGenreScore } from "@/data/use-cases";
 import { UpdateMusicalGenreScoreRepositorySpy } from "@/tests/data/mocks";
-
-import { faker } from "@faker-js/faker";
+import { mockUpdateMusicalGenreScore } from "@/tests/domain/mocks";
 
 const makeSut = () => {
   const updateMusicalGenreScoreRepositorySpy = new UpdateMusicalGenreScoreRepositorySpy();
@@ -12,7 +11,7 @@ const makeSut = () => {
 describe("DbUpdateMusicalGenreScore", () => {
   it("should call 'updateMusicalGenreScoreRepository'", async () => {
     const { sut, updateMusicalGenreScoreRepositorySpy } = makeSut();
-    const result = await sut.perform({ id: parseInt(faker.random.numeric(1)) });
+    const result = await sut.perform(mockUpdateMusicalGenreScore());
     expect(result).toHaveProperty("score");
     expect(updateMusicalGenreScoreRepositorySpy.callsCount).toBe(1);
   });
