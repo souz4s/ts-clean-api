@@ -16,11 +16,11 @@ describe("CreateUserController", () => {
     expect(createUserSpy.callsCount).toBe(1);
   });
 
-  it("should return the status ok when creating the user", async () => {
+  it("should return the status created when creating the user", async () => {
     const { sut, createUserSpy } = makeSut();
     const result = await sut.handle(mockCreateUserParams());
     expect(createUserSpy.callsCount).toBe(1);
-    expect(result.statusCode).toBe(200);
+    expect(result.statusCode).toBe(201);
   });
 
   it("should return bad request error when missing required parameters", async () => {
