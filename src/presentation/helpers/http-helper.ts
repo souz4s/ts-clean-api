@@ -7,16 +7,6 @@ export class HttpHelper {
     body: err,
   });
 
-  static FORBIDDEN = (err: Error): HttpResponse<Error> => ({
-    statusCode: 403,
-    body: err,
-  });
-
-  static NOT_FOUND = (err: Error): HttpResponse<Error> => ({
-    statusCode: 404,
-    body: err,
-  });
-
   static INTERNAL_SERVER_ERROR = (err: Error): HttpResponse<Error> => ({
     statusCode: 500,
     body: new InternalServerError(err.stack || ""),
