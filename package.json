@@ -14,7 +14,7 @@
     "src/**/*.ts": [
       "prettier --write",
       "prettier --check",
-      "jest --bail --findRelatedTests --passWithNoTests src/**/*.ts",
+      "jest --bail --findRelatedTests tests/**/*.ts",
       "npm run lint --fix"
     ]
   },
