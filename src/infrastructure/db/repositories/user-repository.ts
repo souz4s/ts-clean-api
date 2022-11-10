@@ -5,9 +5,7 @@ export class UserRepository implements CreateUserRepository, GetUserByEmailRepos
   createUser = async (params: CreateUserRepository.Params): Promise<CreateUserRepository.Result> => {
     const userCollection = prismaClient.getConnection().users;
     const user = await userCollection.create({
-      data: {
-        ...params,
-      },
+      data: { ...params },
     });
     return { id: user.id };
   };
@@ -15,9 +13,7 @@ export class UserRepository implements CreateUserRepository, GetUserByEmailRepos
   getByEmail = async (params: GetUserByEmailRepository.Params): Promise<GetUserByEmailRepository.Result> => {
     const userCollection = prismaClient.getConnection().users;
     const user = await userCollection.findFirst({
-      where: {
-        email: params.email,
-      },
+      where: { email: params.email },
     });
     return { user: user || undefined };
   };
