@@ -56,4 +56,4 @@ We welcome contributions to this repository. If you have an idea for a new featu
 
 ## **License**
 
-This project is licensed under the MIT License - see the **[LICENSE](https://chat.openai.com/LICENSE)** file for details.
+This project is licensed under the MIT License - see the **[LICENSE](https://github.com/souz4s/ts-clean-api/blob/main/LICENSE)** file for details.
