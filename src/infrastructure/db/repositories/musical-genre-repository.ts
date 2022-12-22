@@ -7,7 +7,10 @@ export class MusicalGenreRepository implements UpdateMusicalGenreScoreRepository
     const getMusicalGenreScore = await musicalGenreCollection.findFirst({
       where: { id: params.id },
     });
-    const score = getMusicalGenreScore?.score != undefined ? getMusicalGenreScore?.score + 1 : 0;
+    const linkedUsers = await prismaClient.getConnection().users.findMany({
+      where: { musicalGenre: { id: params.id } },
+    });
+    const score = getMusicalGenreScore?.score != undefined ? linkedUsers.length : linkedUsers.length;
     const musicalGenre = await musicalGenreCollection.update({
       where: { id: params.id },
       data: { score: score },
