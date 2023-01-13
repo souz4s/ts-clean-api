@@ -16,14 +16,6 @@ This repository contains a clean and organized API built with TypeScript and Nod
 - Node.js and npm (or yarn)
 - A code editor of your choice
 
-## **Getting Started**
-
-1. Clone the repository: **`git clone https://github.com/souz4s/ts-clean-api.git`**
-2. Install the dependencies: **`npm install`** (or **`yarn install`**)
-3. Start the development server: **`npm run dev`** (or **`yarn dev`**)
-
-The API will be running on **[http://localhost:8080](http://localhost:8080/)**.
-
 ## **Tests**
 
 To run the tests, use the following command:
